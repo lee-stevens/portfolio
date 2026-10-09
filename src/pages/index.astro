@@ -33,43 +33,41 @@ const experience = [
 	},
 ];
 
-const education = [
+const projectCategories = [
 	{
-		school: "Brunel University of London",
-		qualification: "MA, Game Theory & Design",
-		period: "Sep 2020 — Sep 2021",
+		name: "Full-Stack",
+		projects: [
+			{
+				name: "Athena Toolkit",
+				featured: true,
+				description: "My most extensive personal project — a self-hosted microservices platform with an Angular frontend and .NET backend, SQL-backed services, and each service deployed as its own Docker image via GitHub Actions to a home Unraid server.",
+				tags: ["Angular", ".NET", "SQL", "Self-Hosted", "Docker", "CI/CD"],
+				link: "https://github.com/lee-stevens/athena-toolkit",
+			},
+			{
+				name: "local-repo-monitor",
+				description: "A lightweight web app for keeping an eye on local git repositories — status, branches, staged/unstaged changes — run as a background Docker container.",
+				tags: ["Docker", "Tooling"],
+				link: "https://github.com/lee-stevens/local-repo-monitor",
+			},
+		],
 	},
 	{
-		school: "Brunel University of London",
-		qualification: "BSc, Computer Science",
-		period: "Sep 2017 — Jul 2020",
-	},
-];
-
-const projects = [
-	{
-		name: "Project Arkane",
-		description: "A single-player survival RTS colony builder in Unity — resource economy, base fortification, and automated defence against escalating enemy waves.",
-		tags: ["Unity", "C#", "Game Dev"],
-		link: "https://github.com/lee-stevens/project-arkane",
-	},
-	{
-		name: "Project Tau",
-		description: "A Unity 6 tower defence / survival game project, designed and built from a full game design document.",
-		tags: ["Unity", "C#", "Game Dev"],
-		link: "https://github.com/lee-stevens/Project-Tau",
-	},
-	{
-		name: "Athena Toolkit",
-		description: "A set of self-hosted microservices, each deployed as its own Docker image via GitHub Actions to a home Unraid server.",
-		tags: ["Docker", "CI/CD", "Self-hosted"],
-		link: "https://github.com/lee-stevens/athena-toolkit",
-	},
-	{
-		name: "local-repo-monitor",
-		description: "A lightweight web app for keeping an eye on local git repositories — status, branches, staged/unstaged changes — run as a background Docker container.",
-		tags: ["Docker", "Tooling"],
-		link: "https://github.com/lee-stevens/local-repo-monitor",
+		name: "Game Development",
+		projects: [
+			{
+				name: "Project Arkane",
+				description: "A single-player survival RTS colony builder in Unity — resource economy, base fortification, and automated defence against escalating enemy waves.",
+				tags: ["Unity", "C#", "Game Dev"],
+				link: "https://github.com/lee-stevens/project-arkane",
+			},
+			{
+				name: "Project Tau",
+				description: "A Unity 6 tower defence / survival game project, designed and built from a full game design document.",
+				tags: ["Unity", "C#", "Game Dev"],
+				link: "https://github.com/lee-stevens/Project-Tau",
+			},
+		],
 	},
 ];
 ---
@@ -119,40 +117,58 @@ const projects = [
 		))}
 	</section>
 
-	<section id="education">
-		<h2>Education</h2>
-		{education.map((edu) => (
-			<div style="margin-bottom: 1.25rem;">
-				<h3 style="margin-bottom: 0.1em;">{edu.qualification}</h3>
-				<p style="color: var(--text-muted); margin: 0;">
-					{edu.school} &nbsp;·&nbsp; {edu.period}
-				</p>
-			</div>
-		))}
-	</section>
-
 	<section id="projects">
 		<h2>Projects</h2>
-		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-			{projects.map((project) => (
-				<a
-					href={project.link}
-					target="_blank"
-					rel="noopener noreferrer"
-					style="display: block; border: 1px solid var(--border); background: var(--bg-elevated); border-radius: 10px; padding: 1.25rem; text-decoration: none; color: var(--text);"
-				>
-					<h3 style="margin-bottom: 0.4em; color: var(--text);">{project.name}</h3>
-					<p style="color: var(--text-muted); margin-bottom: 0.75em;">{project.description}</p>
-					<div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
-						{project.tags.map((tag) => (
-							<span style="font-size: 0.75rem; color: var(--accent); border: 1px solid var(--border); border-radius: 999px; padding: 0.15em 0.6em;">
-								{tag}
-							</span>
-						))}
-					</div>
-				</a>
-			))}
-		</div>
+		{projectCategories.map((category, i) => (
+			<div style={`margin-bottom: ${i === projectCategories.length - 1 ? "0" : "2.5rem"};`}>
+				<h3 style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; margin-bottom: 1rem;">
+					{category.name}
+				</h3>
+
+				{category.projects.filter((p) => p.featured).map((project) => (
+					<a
+						href={project.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						style="display: block; border: 1px solid var(--accent); background: var(--bg-elevated); border-radius: 10px; padding: 1.5rem; text-decoration: none; color: var(--text); margin-bottom: 1.25rem;"
+					>
+						<p style="color: var(--accent); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5em;">
+							Featured project
+						</p>
+						<h4 style="margin-bottom: 0.4em; color: var(--text); font-size: 1.15rem;">{project.name}</h4>
+						<p style="color: var(--text-muted); margin-bottom: 0.75em;">{project.description}</p>
+						<div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+							{project.tags.map((tag) => (
+								<span style="font-size: 0.75rem; color: var(--accent); border: 1px solid var(--border); border-radius: 999px; padding: 0.15em 0.6em;">
+									{tag}
+								</span>
+							))}
+						</div>
+					</a>
+				))}
+
+				<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+					{category.projects.filter((p) => !p.featured).map((project) => (
+						<a
+							href={project.link}
+							target="_blank"
+							rel="noopener noreferrer"
+							style="display: block; border: 1px solid var(--border); background: var(--bg-elevated); border-radius: 10px; padding: 1.25rem; text-decoration: none; color: var(--text);"
+						>
+							<h4 style="margin-bottom: 0.4em; color: var(--text); font-size: 1.05rem;">{project.name}</h4>
+							<p style="color: var(--text-muted); margin-bottom: 0.75em;">{project.description}</p>
+							<div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+								{project.tags.map((tag) => (
+									<span style="font-size: 0.75rem; color: var(--accent); border: 1px solid var(--border); border-radius: 999px; padding: 0.15em 0.6em;">
+										{tag}
+									</span>
+								))}
+							</div>
+						</a>
+					))}
+				</div>
+			</div>
+		))}
 	</section>
 
 	<section id="contact">
