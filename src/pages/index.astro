@@ -76,18 +76,22 @@ const projects = [
 
 <BaseLayout title="Lee Stevens — .NET Developer">
 	<section id="hero">
-		<img
-			src="/images/avatar.jpg"
-			width="120"
-			height="120"
-			alt="Lee Stevens"
-			style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 1.25rem; border: 1px solid var(--border);"
-		/>
-		<h1>Lee Stevens</h1>
-		<p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-			.NET Developer based in London, working across C#, Angular, SQL, and Azure — with a side
-			of Unity game development.
-		</p>
+		<div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+			<img
+				src="/images/avatar.jpg"
+				width="120"
+				height="120"
+				alt="Lee Stevens"
+				style="width: 120px; height: 120px; flex-shrink: 0; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);"
+			/>
+			<div style="flex: 1 1 320px; min-width: 0;">
+				<h1>Lee Stevens</h1>
+				<p style="font-size: 1.25rem; color: var(--text-muted); margin: 0;">
+					.NET Developer based in London, working across C#, Angular, SQL, and Azure — with a side
+					of Unity game development.
+				</p>
+			</div>
+		</div>
 		<p>
 			I build full-stack and backend systems professionally, and spend my spare time on game
 			and tooling projects — from a Unity colony-sim to self-hosted dev tools.
