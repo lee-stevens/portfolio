@@ -3,74 +3,87 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const experience = [
 	{
-		role: "Senior Software Engineer",
-		company: "Northwind Interactive",
-		period: "2023 — Present",
+		role: ".NET Developer",
+		company: "Intersoft",
+		period: "Jan 2026 — Present",
+		location: "Egham, England · Hybrid",
 		points: [
-			"Led development of a real-time grid/tooling system used across three internal projects.",
-			"Cut build pipeline time by 40% by reworking the CI/CD setup and dependency caching.",
-			"Mentored two junior engineers through their first production releases.",
+			"Azure-based microservices and monolithic projects on .NET 8 and .NET Framework 4.8.",
+			"Working across SQL and Docker-based environments.",
 		],
 	},
 	{
-		role: "Software Engineer",
-		company: "Fictional Systems Ltd.",
-		period: "2020 — 2023",
+		role: "Full Stack Web Developer (Angular, .NET & SQL)",
+		company: "Atomus",
+		period: "Dec 2022 — Jan 2026 · 3 yrs 2 mos",
+		location: "Farnham, England · Hybrid",
 		points: [
-			"Built and maintained backend services powering a multiplayer game platform.",
-			"Migrated legacy editor tooling to a modern, modular architecture.",
-			"Owned the on-call rotation for core infrastructure services.",
+			"Built and maintained full-stack features with Angular, .NET 6/8, and SQL.",
+			"Set up and maintained Azure CI/CD pipelines across RDBMS-backed services.",
 		],
 	},
 	{
-		role: "Junior Developer",
-		company: "Sample Studios",
-		period: "2018 — 2020",
+		role: "VBA & Web Developer",
+		company: "Audit Intelligence",
+		period: "Feb 2022 — Nov 2022 · 10 mos",
+		location: "",
 		points: [
-			"Shipped gameplay features and bug fixes across two released titles.",
-			"Wrote automated test coverage for core game logic.",
+			"Delivered internal tooling spanning project management and software development.",
 		],
+	},
+];
+
+const education = [
+	{
+		school: "Brunel University of London",
+		qualification: "MA, Game Theory & Design",
+		period: "Sep 2020 — Sep 2021",
+	},
+	{
+		school: "Brunel University of London",
+		qualification: "BSc, Computer Science",
+		period: "Sep 2017 — Jul 2020",
 	},
 ];
 
 const projects = [
 	{
 		name: "Project Arkane",
-		description: "A grid-based systems sandbox exploring modular editor tooling and in-engine workflows.",
-		tags: ["Unity", "C#", "Tooling"],
+		description: "A single-player survival RTS colony builder in Unity — resource economy, base fortification, and automated defence against escalating enemy waves.",
+		tags: ["Unity", "C#", "Game Dev"],
 		link: "https://github.com/lee-stevens/project-arkane",
 	},
 	{
-		name: "Arkane OS",
-		description: "An experimental operating-system-style shell layer built on top of the Arkane tooling stack.",
-		tags: ["Systems", "C#"],
-		link: "https://github.com/lee-stevens",
+		name: "Project Tau",
+		description: "A Unity 6 tower defence / survival game project, designed and built from a full game design document.",
+		tags: ["Unity", "C#", "Game Dev"],
+		link: "https://github.com/lee-stevens/Project-Tau",
 	},
 	{
 		name: "Athena Toolkit",
-		description: "A collection of reusable developer utilities and editor extensions.",
-		tags: ["Dev Tools"],
-		link: "https://github.com/lee-stevens",
+		description: "A set of self-hosted microservices, each deployed as its own Docker image via GitHub Actions to a home Unraid server.",
+		tags: ["Docker", "CI/CD", "Self-hosted"],
+		link: "https://github.com/lee-stevens/athena-toolkit",
 	},
 	{
-		name: "Project Tau",
-		description: "A prototype exploring procedural generation and performance-focused rendering.",
-		tags: ["Rendering", "Performance"],
-		link: "https://github.com/lee-stevens",
+		name: "local-repo-monitor",
+		description: "A lightweight web app for keeping an eye on local git repositories — status, branches, staged/unstaged changes — run as a background Docker container.",
+		tags: ["Docker", "Tooling"],
+		link: "https://github.com/lee-stevens/local-repo-monitor",
 	},
 ];
 ---
 
-<BaseLayout title="Lee Stevens — Software Engineer">
+<BaseLayout title="Lee Stevens — .NET Developer">
 	<section id="hero">
 		<h1>Lee Stevens</h1>
 		<p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-			Software Engineer building tools, games, and the occasional over-engineered side project.
+			.NET Developer based in London, working across C#, Angular, SQL, and Azure — with a side
+			of Unity game development.
 		</p>
 		<p>
-			I'm a software engineer with a few years of experience across tooling, backend systems,
-			and game development. This page is a quick look at what I've worked on — replace this
-			text with your real bio.
+			I build full-stack and backend systems professionally, and spend my spare time on game
+			and tooling projects — from a Unity colony-sim to self-hosted dev tools.
 		</p>
 		<p>
 			<a href="#projects">View projects</a> &nbsp;·&nbsp; <a href="#contact">Get in touch</a>
@@ -84,12 +97,25 @@ const projects = [
 				<h3 style="margin-bottom: 0.1em;">{job.role}</h3>
 				<p style="color: var(--text-muted); margin: 0 0 0.75em;">
 					{job.company} &nbsp;·&nbsp; {job.period}
+					{job.location && <>&nbsp;·&nbsp; {job.location}</>}
 				</p>
 				<ul style="margin: 0; padding-left: 1.25em;">
 					{job.points.map((point) => (
 						<li>{point}</li>
 					))}
 				</ul>
+			</div>
+		))}
+	</section>
+
+	<section id="education">
+		<h2>Education</h2>
+		{education.map((edu) => (
+			<div style="margin-bottom: 1.25rem;">
+				<h3 style="margin-bottom: 0.1em;">{edu.qualification}</h3>
+				<p style="color: var(--text-muted); margin: 0;">
+					{edu.school} &nbsp;·&nbsp; {edu.period}
+				</p>
 			</div>
 		))}
 	</section>
