@@ -1,0 +1,130 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const experience = [
+	{
+		role: "Senior Software Engineer",
+		company: "Northwind Interactive",
+		period: "2023 — Present",
+		points: [
+			"Led development of a real-time grid/tooling system used across three internal projects.",
+			"Cut build pipeline time by 40% by reworking the CI/CD setup and dependency caching.",
+			"Mentored two junior engineers through their first production releases.",
+		],
+	},
+	{
+		role: "Software Engineer",
+		company: "Fictional Systems Ltd.",
+		period: "2020 — 2023",
+		points: [
+			"Built and maintained backend services powering a multiplayer game platform.",
+			"Migrated legacy editor tooling to a modern, modular architecture.",
+			"Owned the on-call rotation for core infrastructure services.",
+		],
+	},
+	{
+		role: "Junior Developer",
+		company: "Sample Studios",
+		period: "2018 — 2020",
+		points: [
+			"Shipped gameplay features and bug fixes across two released titles.",
+			"Wrote automated test coverage for core game logic.",
+		],
+	},
+];
+
+const projects = [
+	{
+		name: "Project Arkane",
+		description: "A grid-based systems sandbox exploring modular editor tooling and in-engine workflows.",
+		tags: ["Unity", "C#", "Tooling"],
+		link: "https://github.com/lee-stevens/project-arkane",
+	},
+	{
+		name: "Arkane OS",
+		description: "An experimental operating-system-style shell layer built on top of the Arkane tooling stack.",
+		tags: ["Systems", "C#"],
+		link: "https://github.com/lee-stevens",
+	},
+	{
+		name: "Athena Toolkit",
+		description: "A collection of reusable developer utilities and editor extensions.",
+		tags: ["Dev Tools"],
+		link: "https://github.com/lee-stevens",
+	},
+	{
+		name: "Project Tau",
+		description: "A prototype exploring procedural generation and performance-focused rendering.",
+		tags: ["Rendering", "Performance"],
+		link: "https://github.com/lee-stevens",
+	},
+];
+---
+
+<BaseLayout title="Lee Stevens — Software Engineer">
+	<section id="hero">
+		<h1>Lee Stevens</h1>
+		<p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+			Software Engineer building tools, games, and the occasional over-engineered side project.
+		</p>
+		<p>
+			I'm a software engineer with a few years of experience across tooling, backend systems,
+			and game development. This page is a quick look at what I've worked on — replace this
+			text with your real bio.
+		</p>
+		<p>
+			<a href="#projects">View projects</a> &nbsp;·&nbsp; <a href="#contact">Get in touch</a>
+		</p>
+	</section>
+
+	<section id="experience">
+		<h2>Experience</h2>
+		{experience.map((job) => (
+			<div style="margin-bottom: 2rem;">
+				<h3 style="margin-bottom: 0.1em;">{job.role}</h3>
+				<p style="color: var(--text-muted); margin: 0 0 0.75em;">
+					{job.company} &nbsp;·&nbsp; {job.period}
+				</p>
+				<ul style="margin: 0; padding-left: 1.25em;">
+					{job.points.map((point) => (
+						<li>{point}</li>
+					))}
+				</ul>
+			</div>
+		))}
+	</section>
+
+	<section id="projects">
+		<h2>Projects</h2>
+		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+			{projects.map((project) => (
+				<a
+					href={project.link}
+					target="_blank"
+					rel="noopener noreferrer"
+					style="display: block; border: 1px solid var(--border); background: var(--bg-elevated); border-radius: 10px; padding: 1.25rem; text-decoration: none; color: var(--text);"
+				>
+					<h3 style="margin-bottom: 0.4em; color: var(--text);">{project.name}</h3>
+					<p style="color: var(--text-muted); margin-bottom: 0.75em;">{project.description}</p>
+					<div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+						{project.tags.map((tag) => (
+							<span style="font-size: 0.75rem; color: var(--accent); border: 1px solid var(--border); border-radius: 999px; padding: 0.15em 0.6em;">
+								{tag}
+							</span>
+						))}
+					</div>
+				</a>
+			))}
+		</div>
+	</section>
+
+	<section id="contact">
+		<h2>Contact</h2>
+		<p>
+			Email: <a href="mailto:lee.stevens.core@gmail.com">lee.stevens.core@gmail.com</a>
+		</p>
+		<p>
+			GitHub: <a href="https://github.com/lee-stevens" target="_blank" rel="noopener noreferrer">github.com/lee-stevens</a>
+		</p>
+	</section>
+</BaseLayout>
