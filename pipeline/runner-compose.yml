@@ -1,0 +1,42 @@
+# Self-hosted GitHub Actions runner for this repo, meant to run on the
+# Unraid host itself. Deliberately its own compose file/lifecycle, separate
+# from docker-compose.yml, so tearing down the app stack doesn't also remove
+# the thing that redeploys it.
+#
+# Builds runner.Dockerfile (official ghcr.io/actions/actions-runner base +
+# our own entrypoint.sh) rather than pulling a community wrapper image -
+# more transparent, and avoids wrapper-specific bugs.
+#
+# Requires an ACCESS_TOKEN (a GitHub personal access token - classic with
+# "repo" scope, or fine-grained with "Administration: Read and write" on
+# this repo) in a sibling .env file next to this one.
+#
+# Usage on Unraid:
+#   docker compose -f pipeline/runner-compose.yml up -d --build
+
+name: portfolio-runner
+
+services:
+  github-runner:
+    build:
+      context: .
+      dockerfile: runner.Dockerfile
+    container_name: portfolio-github-runner
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      REPO_URL: https://github.com/lee-stevens/portfolio
+      RUNNER_NAME: unraid
+      LABELS: self-hosted,unraid-portfolio
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # The deploy job in build-and-deploy.yml operates directly in this
+      # real deployment directory - it must exist at the identical path
+      # inside the runner container too, since the runner is itself a
+      # container, not the host.
+      - /mnt/user/appdata/portfolio:/mnt/user/appdata/portfolio
+      - runner-work:/home/runner/_work
+
+volumes:
+  runner-work:

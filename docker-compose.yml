@@ -1,5 +1,8 @@
+name: portfolio
+
 services:
   portfolio:
+    image: ghcr.io/lee-stevens/portfolio
     build: .
     container_name: portfolio
     ports:
